@@ -1,0 +1,24 @@
+--------------------------------------------------------------------------------
+-- Title         : 8-Bit Adder
+-- Project       : VHDL Synthesis Overview
+-------------------------------------------------------------------------------
+-- File          : eightBitAdder.vhd
+-- Author        : Aaron Thomas  <athom254@uottawa.ca>
+-- Created       : 2024/05/30
+-- Last modified : 2024/05/30
+-------------------------------------------------------------------------------
+-- Description : This file defines an 8-bit adder that computes the sum of two 
+--                8-bit inputs along with a carry-out signal. It consists of 
+--                seven instances of a one-bit adder component interconnected 
+--                to perform the addition operation.
+-------------------------------------------------------------------------------
+-- Modification history :
+-- 2024/05/30  Aaron Thomas  Initial creation
+-------------------------------------------------------------------------------
+-- This file is provided by Aaron Thomas. Permission to make digital or hard 
+-- copies of part or all of this work for personal or classroom use is granted 
+-- without fee provided that copies are not made or distributed for profit or 
+-- commercial advantage and that copies bear this notice and the full citation 
+-- of this work. Prior permission is required to copy, republish, redistribute, 
+-- or post this work. This notice is adapted from the ACM copyright notice.
+--------------------------------------------------------------------------------

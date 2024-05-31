@@ -1,0 +1,41 @@
+--------------------------------------------------------------------------------
+-- Title         : One Bit Comparator - 1st realization
+-- Project       : VHDL Synthesis Overview
+-------------------------------------------------------------------------------
+-- File          : oneBitComparator.vhd
+-- Author        : Rami Abielmona  <rabielmo@site.uottawa.ca>
+-- Created       : 2003/05/17
+-- Last modified : 2007/09/25
+-------------------------------------------------------------------------------
+-- Description : This file compares 2 different bits to each other 
+-------------------------------------------------------------------------------
+-- Modification history :
+-- 2003.05.17 	R. Abielmona		Creation
+-- 2004.09.22 	R. Abielmona		Ported for CEG 3550
+-- 2007.09.25 	R. Abielmona		Modified copyright notice
+-------------------------------------------------------------------------------
+-- This file is copyright material of Rami Abielmona, Ph.D., P.Eng., Chief Research
+-- Scientist at Larus Technologies.  Permission to make digital or hard copies of part
+-- or all of this work for personal or classroom use is granted without fee
+-- provided that copies are not made or distributed for profit or commercial
+-- advantage and that copies bear this notice and the full citation of this work.
+-- Prior permission is required to copy, republish, redistribute or post this work.
+-- This notice is adapted from the ACM copyright notice.
+--------------------------------------------------------------------------------
+
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY oneBitComparator IS
+    PORT(
+        a, b : IN  STD_LOGIC;
+        equal, less_than : OUT STD_LOGIC
+    );
+END oneBitComparator;
+
+ARCHITECTURE rtl OF oneBitComparator IS
+BEGIN
+    equal <= '1' WHEN a = b ELSE '0';
+    less_than <= '1' WHEN a < b ELSE '0';
+END rtl;

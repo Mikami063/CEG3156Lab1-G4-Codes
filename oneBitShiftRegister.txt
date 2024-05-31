@@ -1,0 +1,55 @@
+--------------------------------------------------------------------------------
+-- Title         : One-Bit Shift Register
+-- Project       : VHDL Synthesis Overview
+-------------------------------------------------------------------------------
+-- File          : oneBitShiftRegister.vhd
+-- Author        : Aaron Thomas <athom254@uottawa.ca>
+-- Created       : 2024/05/30
+-- Last modified : 2024/05/30
+-------------------------------------------------------------------------------
+-- Description : This file defines a one-bit shift register with control inputs
+--                for loading, shifting, and clearing the register. It operates
+--                on rising edges of a clock signal and has an input for 
+--                data-in and an output for data-out.
+-------------------------------------------------------------------------------
+-- Modification history :
+-- 2024/05/30  Aaron Thomas  Initial creation
+-------------------------------------------------------------------------------
+-- This file is provided by Aaron Thomas. Permission to make 
+-- digital or hard copies of part or all of this work for personal or classroom 
+-- use is granted without fee provided that copies are not made or distributed 
+-- for profit or commercial advantage and that copies bear this notice and the 
+-- full citation of this work. Prior permission is required to copy, republish, 
+-- redistribute, or post this work. This notice is adapted from the ACM copyright notice.
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_unsigned.ALL;
+
+ENTITY oneBitShiftRegister IS
+    PORT(
+        clk : IN  STD_LOGIC;
+        load, shift, clear : IN  STD_LOGIC;
+        data_in : IN  STD_LOGIC;
+        data_out : OUT STD_LOGIC
+    );
+END oneBitShiftRegister;
+
+ARCHITECTURE rtl OF oneBitShiftRegister IS
+    SIGNAL reg : STD_LOGIC;
+BEGIN
+    PROCESS(clk)
+    BEGIN
+        IF rising_edge(clk) THEN
+            IF clear = '1' THEN
+                reg <= '0';
+            ELSIF load = '1' THEN
+                reg <= data_in;
+            ELSIF shift = '1' THEN
+                reg <= reg;
+            END IF;
+        END IF;
+    END PROCESS;
+    data_out <= reg;
+END rtl;

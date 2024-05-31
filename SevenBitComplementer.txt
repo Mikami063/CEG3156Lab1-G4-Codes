@@ -1,0 +1,50 @@
+--------------------------------------------------------------------------------
+-- Title         : 7-Bit Complementer
+-- Project       : VHDL Synthesis Overview
+-------------------------------------------------------------------------------
+-- File          : Complementer7bit.vhd
+-- Author        : Aaron Thomas  <athom254@uottawa.ca>
+-- Created       : 2024/05/30
+-- Last modified : 2024/05/30
+-------------------------------------------------------------------------------
+-- Description : This file defines a 7-bit complementer that takes a 7-bit 
+--                vector 'data_in' and a control signal 'complement'. If 
+--                'complement' is high ('1'), it computes the two's complement 
+--                of 'data_in'. If 'complement' is low ('0'), it passes 'data_in' 
+--                unchanged. The result is output as 'data_out'.
+-------------------------------------------------------------------------------
+-- Modification history :
+-- 2024/05/30  Aaron Thomas  Initial creation
+-------------------------------------------------------------------------------
+-- This file is provided by Aaron Thomas. Permission to make digital or hard 
+-- copies of part or all of this work for personal or classroom use is granted 
+-- without fee provided that copies are not made or distributed for profit or 
+-- commercial advantage and that copies bear this notice and the full citation 
+-- of this work. Prior permission is required to copy, republish, redistribute, 
+-- or post this work. This notice is adapted from the ACM copyright notice.
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL; -- Add this line
+
+ENTITY Complementer7bit IS
+    PORT(
+        data_in : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
+        complement : IN STD_LOGIC;
+        data_out : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
+    );
+END ENTITY;
+
+ARCHITECTURE structural OF Complementer7bit IS
+BEGIN
+    PROCESS(data_in, complement)
+    BEGIN
+        IF complement = '1' THEN
+            -- Convert STD_LOGIC_VECTOR to unsigned before performing addition
+            data_out <= std_logic_vector(unsigned(NOT data_in) + 1);
+        ELSE
+            data_out <= data_in;
+        END IF;
+    END PROCESS;
+END ARCHITECTURE;

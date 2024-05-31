@@ -1,0 +1,117 @@
+--------------------------------------------------------------------------------
+-- Title         : Eight-Bit Shift Register
+-- Project       : VHDL Synthesis Overview
+-------------------------------------------------------------------------------
+-- File          : eightBitShiftRegister.vhd
+-- Author        : Aaron Thomas <athom254@uottawa.ca>
+-- Created       : 2024/05/30
+-- Last modified : 2024/05/30
+-------------------------------------------------------------------------------
+-- Description : This file defines an eight-bit shift register with control 
+--                inputs for loading, shifting, and clearing the register. It 
+--                operates on rising edges of a clock signal and has an input 
+--                for data-in and an output for data-out.
+-------------------------------------------------------------------------------
+-- Modification history :
+-- 2024/05/30  Aaron Thomas  Initial creation
+-------------------------------------------------------------------------------
+-- This file is provided by Aaron Thomas. Permission to make 
+-- digital or hard copies of part or all of this work for personal or classroom 
+-- use is granted without fee provided that copies are not made or distributed 
+-- for profit or commercial advantage and that copies bear this notice and the 
+-- full citation of this work. Prior permission is required to copy, republish, 
+-- redistribute, or post this work. This notice is adapted from the ACM copyright notice.
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_unsigned.ALL;
+
+ENTITY eightBitShiftRegister IS
+    PORT(
+        clk : IN  STD_LOGIC;
+        load, shift, clear : IN  STD_LOGIC;
+        data_in : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+        data_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+    );
+END eightBitShiftRegister;
+
+ARCHITECTURE rtl OF eightBitShiftRegister IS
+    SIGNAL reg : STD_LOGIC_VECTOR(7 DOWNTO 0);
+
+    COMPONENT oneBitShiftRegister
+    PORT(
+        clk : IN  STD_LOGIC;
+        load, shift, clear : IN  STD_LOGIC;
+        data_in : IN  STD_LOGIC;
+        data_out : OUT STD_LOGIC
+    );
+    END COMPONENT;
+
+BEGIN
+    bit7: oneBitShiftRegister
+        PORT MAP (clk => clk,
+                  load => load,
+                  shift => shift,
+                  clear => clear,
+                  data_in => data_in(7),
+                  data_out => reg(7));
+
+    bit6: oneBitShiftRegister
+        PORT MAP (clk => clk,
+                  load => load,
+                  shift => shift,
+                  clear => clear,
+                  data_in => data_in(6),
+                  data_out => reg(6));
+
+    bit5: oneBitShiftRegister
+        PORT MAP (clk => clk,
+                  load => load,
+                  shift => shift,
+                  clear => clear,
+                  data_in => data_in(5),
+                  data_out => reg(5));
+
+    bit4: oneBitShiftRegister
+        PORT MAP (clk => clk,
+                  load => load,
+                  shift => shift,
+                  clear => clear,
+                  data_in => data_in(4),
+                  data_out => reg(4));
+
+    bit3: oneBitShiftRegister
+        PORT MAP (clk => clk,
+                  load => load,
+                  shift => shift,
+                  clear => clear,
+                  data_in => data_in(3),
+                  data_out => reg(3));
+
+    bit2: oneBitShiftRegister
+        PORT MAP (clk => clk,
+                  load => load,
+                  shift => shift,
+                  clear => clear,
+                  data_in => data_in(2),
+                  data_out => reg(2));
+
+    bit1: oneBitShiftRegister
+        PORT MAP (clk => clk,
+                  load => load,
+                  shift => shift,
+                  clear => clear,
+                  data_in => data_in(1),
+                  data_out => reg(1));
+
+    bit0: oneBitShiftRegister
+        PORT MAP (clk => clk,
+                  load => load,
+                  shift => shift,
+                  clear => clear,
+                  data_in => data_in(0),
+                  data_out => reg(0));
+
+    data_out <= reg;
+END rtl;

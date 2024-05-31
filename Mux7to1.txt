@@ -1,0 +1,59 @@
+--------------------------------------------------------------------------------
+-- Title         : 7-to-1 Multiplexer
+-- Project       : VHDL Synthesis Overview
+-------------------------------------------------------------------------------
+-- File          : mux7to1.vhd
+-- Author        : Aaron Thomas  <athom254@uottawa.ca>
+-- Created       : 2024/05/30
+-- Last modified : 2024/05/30
+-------------------------------------------------------------------------------
+-- Description : This file defines a 7-to-1 multiplexer (MUX) with 7-bit inputs
+--                and a 3-bit select input. Depending on the value of the select 
+--                input, one of the 7-bit inputs is routed to the output.
+-------------------------------------------------------------------------------
+-- Modification history :
+-- 2024/05/30  Aaron Thomas  Initial creation
+-------------------------------------------------------------------------------
+-- This file is provided by Aaron Thomas. Permission to make digital or hard 
+-- copies of part or all of this work for personal or classroom use is granted 
+-- without fee provided that copies are not made or distributed for profit or 
+-- commercial advantage and that copies bear this notice and the full citation 
+-- of this work. Prior permission is required to copy, republish, redistribute, 
+-- or post this work. This notice is adapted from the ACM copyright notice.
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY mux7to1 IS
+    PORT(
+        i_S : IN STD_LOGIC_VECTOR(2 DOWNTO 0); -- 3-bit select input
+        i_I0, i_I1, i_I2, i_I3, i_I4, i_I5, i_I6 : IN STD_LOGIC_VECTOR(6 DOWNTO 0); -- 7-bit inputs
+        o_O : OUT STD_LOGIC_VECTOR(6 DOWNTO 0) -- 7-bit output
+    );
+END ENTITY;
+
+ARCHITECTURE rtl OF mux7to1 IS
+BEGIN
+    PROCESS(i_S, i_I0, i_I1, i_I2, i_I3, i_I4, i_I5, i_I6)
+    BEGIN
+        CASE i_S IS
+            WHEN "000" =>
+                o_O <= i_I0;
+            WHEN "001" =>
+                o_O <= i_I1;
+            WHEN "010" =>
+                o_O <= i_I2;
+            WHEN "011" =>
+                o_O <= i_I3;
+            WHEN "100" =>
+                o_O <= i_I4;
+            WHEN "101" =>
+                o_O <= i_I5;
+            WHEN "110" =>
+                o_O <= i_I6;
+            WHEN OTHERS =>
+                o_O <= (OTHERS => '0'); -- Default output
+        END CASE;
+    END PROCESS;
+END ARCHITECTURE;
